@@ -1,0 +1,14 @@
+__pycache__/
+.ipynb_checkpoints/
+*.pkl
+*.pyc
+.vscode/
+runs*
+data/
+logs/
+wandb/*
+stats/
+.DS_Store
+stats/
+data.zip
+stats.zip

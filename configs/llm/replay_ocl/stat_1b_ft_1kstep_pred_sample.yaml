@@ -1,0 +1,28 @@
+output_dir: "runs/stats/stats-olmo-1b-ft/replay/{fpd_method}_{mixture_method}_mix_{mixture_ratio}_temp_{temperature}_seed_{replay_seed}/{ocl_task_category}-{ocl_step}-lr2e-6/task_{ocl_task_id}"
+
+templates:
+  ocl_task_id: -1
+  ocl_task_category: "debug"
+  ocl_step: "1k"
+
+  mixture_ratio: 0.125
+  replay_seed: 0
+  mixture_method: 'pred_sample'
+  temperature: 0.1
+  fpd_method: "knn"
+
+dolma:
+  sample_path: "data/dolma_chunked_sample/stratified_1_100_tokenize_fix.pkl"
+
+stat:
+  ocl_task_category: "{ocl_task_category}"
+  ocl_task_id: "{ocl_task_id}"
+  pt_task_id: -1
+  pt_task_category: "dolma"
+  task_model_dir: "runs/olmo-1b-ft/replay/{fpd_method}_{mixture_method}_mix_{mixture_ratio}_temp_{temperature}_seed_{replay_seed}/{ocl_task_category}-{ocl_step}-full-ft-lr2e-6/task_{ocl_task_id}/model_save/"
+
+exp_group: "dolma"
+
+model_name: "allenai/OLMo-1B-hf"
+tokenizer_name: "allenai/OLMo-1B-hf"
+chat_template_name: "allenai/OLMo-7B-Instruct-hf"

@@ -1,0 +1,4 @@
+fpd:
+  method: "rep_task_level"
+
+output_dir: "runs/forgetting_prediction/rep_dot/fpd_{postfix}"

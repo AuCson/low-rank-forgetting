@@ -1,0 +1,26 @@
+output_dir: "runs/stats/stats-olmo-7b-ins-ft-test/partition/{mixture_method}_mix_{mixture_ratio}/{ocl_task_category}/task_{ocl_task_id}"
+
+templates:
+  ocl_task_id: -1
+  ocl_task_category: "debug"
+  
+  mixture_ratio: 0.03125
+  replay_seed: 0
+  mixture_method: 'pred_sample_temp0.1_knn_baseline'
+
+
+stat:
+  ocl_task_category: "{ocl_task_category}"
+  ocl_task_id: "{ocl_task_id}"
+  pt_task_id: -1
+  pt_task_category: "tulu"
+  task_model_dir: "runs/olmo-7b-ft-continual/partition/{ocl_task_category}_7b_ins_{mixture_method}/task_{ocl_task_id}/task_{ocl_task_id}/model_save"
+
+exp_group: "tulu"
+
+model_name: "allenai/OLMo-7B-Instruct"
+tokenizer_name: "allenai/OLMo-7B-Instruct-hf"
+chat_template_name: "allenai/OLMo-7B-Instruct-hf"
+
+tulu:
+  path: "data/tulu_sample/sample_1k_test.json"

@@ -1,0 +1,29 @@
+output_dir: "runs/pythia-ft/1b/{TASK_CATEGORY}-1k-full-ft-lr2e-6/task_{TASK_ID}"
+
+templates:
+  task_id: "{TASK_ID}"
+  task_category: "{TASK_CATEGORY}"
+
+ocl:
+  task_category: "{TASK_CATEGORY}"
+  task_id: "{TASK_ID}"
+
+model_name: "EleutherAI/pythia-1b"
+max_input_length: 1024
+
+learning_rate: 2.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 4
+per_device_train_batch_size: 4
+ocl_val_step: 100
+
+n_gpus: 2
+
+max_epoch: 3
+ocl_steps: 1000
+
+chat_template_name: "allenai/OLMo-7B-Instruct-hf"
+ans_start_pattern: "<|assistant|>\n" 

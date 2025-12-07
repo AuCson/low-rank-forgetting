@@ -1,0 +1,48 @@
+output_dir: "runs/olmo-1b-ft/replay/{fpd_method}_{mixture_method}_mix_{mixture_ratio}_temp_{temperature}_seed_{replay_seed}/{TASK_CATEGORY}-1k-full-ft-lr2e-6/task_{TASK_ID}"
+
+templates:
+  mixture_ratio: 0.03125
+  replay_seed: 0
+  mixture_method: 'pred_max' # sampling only happens when mixture method is 'gt_sample'
+  temperature: 1.0
+  outlier_mask: 0.0
+  fpd_method: "knn"
+
+
+replay:
+  enabled: true
+  task_category: 'dolma_sample'
+  heldout_num: 10000
+  mixture_method: "{mixture_method}"
+  mixture_ratio: "{mixture_ratio}"
+  seed: "{replay_seed}"
+  gt_fgt_arr_path: "runs/stats/stats-olmo-1b-ft/flan-1k-lr2e-6/task_{TASK_ID}/pt_fgt_arr.npy"
+  temperature: "{temperature}"
+  outlier_mask: "{outlier_mask}"
+
+  ocl_task_id: "{TASK_ID}"
+  pred_fgt_arr_path: "runs/forgetting_prediction/fpd-split-olmo-1b-id.pkl/preds_knn_baseline_k30_results_fix/preds_seed_0.pkl"
+  fpd_split: "stats/olmo-1b/fpd-split-olmo-1b-id.pkl"
+  base_fgt_path: "runs/stats/stats-olmo-1b-ft/flan-1k/task_0/pt-base_ppl_results.pkl.npy"
+
+ocl:
+  task_category: "{TASK_CATEGORY}"
+  task_id: "{TASK_ID}"
+
+max_input_length: 1024
+
+model_name: "allenai/OLMo-1B-hf"
+learning_rate: 2.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 4
+per_device_train_batch_size: 4
+ocl_val_step: 100
+
+max_epoch: 3
+ocl_steps: 1000
+
+use_flash_attention_2: false
+bf16: false

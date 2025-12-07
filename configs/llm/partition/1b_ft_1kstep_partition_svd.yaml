@@ -1,0 +1,84 @@
+
+output_dir: "/mnt/nfs2/anonymous/llm_forget_nfs2/olmo-1b-ft-continual/partition/{TASK_CATEGORY}_1b_pred_sample_temp0.1_svd/task_{TASK_ID}"
+
+
+templates:
+  mixture_ratio: 0.03125
+  replay_seed: 0
+  mixture_method: 'random'
+
+
+ocl:
+  task_category: "{TASK_CATEGORY}"
+  task_id: "{TASK_ID}"
+
+
+replay:
+  enabled: true
+  task_category: 'dolma_sample'
+  heldout_num: 10000
+  mixture_method: "{mixture_method}"
+  mixture_ratio: "{mixture_ratio}"
+  seed: "{replay_seed}"
+
+
+
+ocl_steps: 1000
+partition:
+  phase_a_train_step_proportion: 0.1
+
+
+  phase_a_replay:
+    enabled: true
+    task_category: 'dolma_sample'
+    heldout_num: 10000
+    mixture_method: "random"
+    mixture_ratio: 0.03125
+    seed: 0
+
+
+  phase_b_replay:
+    enabled: true
+    task_category: 'dolma_sample'
+    heldout_num: 10000
+    mixture_method: "online_pred_sample"
+    mixture_ratio: 0.03125
+    seed: 0
+    temperature: 0.1
+    enable_mask: true
+    
+
+
+model_name: "allenai/OLMo-1B-hf"
+
+fpd:
+  use_fpd_split_file_task_level: true
+  fpd_split_file: "stats/olmo-1b/fpd-split-olmo-1b-id.pkl"
+  model_name: "allenai/OLMo-1B-hf"
+  ts: 0
+
+  train_batch_size: 1
+  sum_or_mean: "mean"
+  base_ppl_path: "runs/stats/stats-olmo-1b-ft/flan-1k/task_0/pt-base_ppl_results.pkl.npy"
+
+  subsample_pt: 10000
+
+  algo_name: "svd"
+  query_k: 30
+  ss_seed: 1
+
+
+max_input_length: 1024
+
+learning_rate: 2.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 4
+per_device_train_batch_size: 4
+ocl_val_step: 100
+
+max_epoch: 3
+
+

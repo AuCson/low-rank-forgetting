@@ -1,0 +1,27 @@
+output_dir: "runs_mpt_ocl/mpt_ocl_ft_nfs1/tulu_train-1k-7b-full-ft-lr2e-6/task_{TASK_ID}"
+
+templates:
+  task_id: "{TASK_ID}"
+
+ocl:
+  task_category: "tulu_train"
+  task_id: "{TASK_ID}"
+
+max_input_length: 1024
+
+learning_rate: 2.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 2
+per_device_train_batch_size: 2
+ocl_val_step: 100
+
+max_epoch: 3
+ocl_steps: 1000
+
+model_name: "mosaicml/mpt-7b"
+
+use_flash_attention_2: false
+gradient_checkpointing: false

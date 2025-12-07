@@ -1,0 +1,36 @@
+output_dir: "runs/olmo-7b-ft/replay/{mixture_method}_mix_{mixture_ratio}_seed_{replay_seed}/{TASK_CATEGORY}-1k-full-ft-lr2e-6/task_{TASK_ID}"
+
+templates:
+  mixture_ratio: 0.125
+  replay_seed: 0
+  mixture_method: 'random'
+
+replay:
+  enabled: true
+  task_category: 'dolma_sample'
+  heldout_num: 10000
+  mixture_method: "{mixture_method}"
+  mixture_ratio: "{mixture_ratio}"
+  seed: "{replay_seed}"
+
+
+
+
+ocl:
+  task_category: "{TASK_CATEGORY}"
+  task_id: "{TASK_ID}"
+
+max_input_length: 1024
+
+learning_rate: 2.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 2
+per_device_train_batch_size: 2
+ocl_val_step: 100
+
+max_epoch: 3
+ocl_steps: 1000
+

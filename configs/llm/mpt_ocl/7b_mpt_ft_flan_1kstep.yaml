@@ -1,0 +1,28 @@
+output_dir: "runs_mpt_ocl/mpt_ocl_ft_nfs1/{task_category}-1k-7b-full-ft/task_{TASK_ID}"
+
+templates:
+  task_id: "{TASK_ID}"
+  task_category: "flan"
+
+ocl:
+  task_category: "{task_category}"
+  task_id: "{TASK_ID}"
+
+max_input_length: 1024
+
+learning_rate: 5.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 2
+per_device_train_batch_size: 2
+ocl_val_step: 100
+
+max_epoch: 3
+ocl_steps: 1000
+
+model_name: "mosaicml/mpt-7b"
+
+use_flash_attention_2: false
+gradient_checkpointing: false

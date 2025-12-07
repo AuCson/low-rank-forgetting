@@ -1,0 +1,49 @@
+output_dir: "runs/olmo-7b-ft-ins/replay/{fpd_method}_{mixture_method}_mix_{mixture_ratio}_seed_{replay_seed}/{task_category}-1k-full-ft-lr2e-6/task_{TASK_ID}"
+
+templates:
+  mixture_ratio: 0.125
+  replay_seed: 0
+  mixture_method: 'pred_sample'
+  temperature: 0.1
+  outlier_mask: 0.0
+  fpd_method: "knn"
+
+replay:
+  enabled: true
+  task_category: 'tulu'
+  heldout_num: 0
+  mixture_method: "{mixture_method}"
+  mixture_ratio: "{mixture_ratio}"
+  seed: "{replay_seed}"
+  gt_fgt_arr_path: "runs/stats/stats-olmo-7b-ins-ft/{task_category}/task_{TASK_ID}/pt_fgt_arr.npy"
+  temperature: "{temperature}"
+  outlier_mask: "{outlier_mask}"
+
+  ocl_task_id: "{TASK_ID}"
+  pred_fgt_arr_path: "runs/forgetting_prediction/fpd-split-olmo-7b-ins-ood-{task_category}.pkl/preds_knn_baseline_k30_results/preds_seed_0.pkl"
+  fpd_split: "stats/olmo-7b-ins/fpd-split-olmo-7b-ins-ood-{task_category}.pkl"
+  base_fgt_path: "runs/stats/stats-olmo-7b-peft/mmlu/task_0/pt-base_ppl_results.pkl.2.npy" 
+
+
+ocl:
+  task_category: "{task_category}"
+  task_id: "{TASK_ID}"
+
+max_input_length: 1024
+
+learning_rate: 2.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 2
+per_device_train_batch_size: 2
+ocl_val_step: 100
+
+max_epoch: 1000000000
+ocl_steps: 100
+
+model_name: "allenai/OLMo-7B-Instruct-hf"
+
+
+

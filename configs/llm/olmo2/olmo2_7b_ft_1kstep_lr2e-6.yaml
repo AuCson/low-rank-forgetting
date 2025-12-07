@@ -1,0 +1,27 @@
+output_dir: "runs/olmo2-7b-ft/{TASK_CATEGORY}-1k-full-ft-lr2e-6/task_{TASK_ID}"
+
+templates:
+  task_id: "{TASK_ID}"
+  task_category: "{TASK_CATEGORY}"
+
+ocl:
+  task_category: "{TASK_CATEGORY}"
+  task_id: "{TASK_ID}"
+
+model_name: "allenai/OLMo-2-1124-7B"
+max_input_length: 1024
+
+learning_rate: 2.0e-6
+gradient_accumulation_steps: 1
+
+is_lm_sft: true
+
+per_device_eval_batch_size: 2
+per_device_train_batch_size: 2
+ocl_val_step: 100
+
+max_epoch: 3
+ocl_steps: 1000
+
+chat_template_name: "allenai/OLMo-2-1124-7B-Instruct"
+ans_start_pattern: "<|assistant|>\n" 

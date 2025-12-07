@@ -1,0 +1,21 @@
+output_dir: "runs/stats/stats-olmo2-1124-13b-ft/{ocl_task_category}-{ocl_step}-lr2e-6/task_{ocl_task_id}"
+
+templates:
+  ocl_task_id: -1
+  ocl_task_category: "debug"
+  ocl_step: "1k"
+
+
+stat:
+  ocl_task_category: "{ocl_task_category}"
+  ocl_task_id: "{ocl_task_id}"
+  pt_task_id: -1
+  pt_task_category: "olmo2pt"
+  task_model_dir: "runs/olmo2-13b-ft/{ocl_task_category}-{ocl_step}-full-ft-lr2e-6/task_{ocl_task_id}/model_save/"
+
+exp_group: "olmo2pt"
+
+model_name: "allenai/OLMo-2-1124-13B"
+chat_template_name: "allenai/OLMo-2-1124-13B-Instruct"
+
+ans_start_pattern: "<|assistant|>\n" 
