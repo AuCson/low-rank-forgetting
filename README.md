@@ -1,4 +1,4 @@
-# Supplementary material for NeurIPS 2025 submission 15520 - Demystifying Language Model Forgetting with Low-rank Example Associations
+# Demystifying Language Model Forgetting with Low-rank Example Associations
 
 ## Environments
 
@@ -10,13 +10,19 @@ We used 4 Quadro RTX A6000 GPUs to run 7B-13B LLM fine-tuning, and used 2 GPUs o
 
 After training the models, we collect forgetting statistics over upstream data. Each run of LLM inference requires 1 GPU of the same type.
 
+## Quick start
+
+`viz_stats.ipynb`: After step 1 below: visualize matrix of forgetting associations
+
+`correlation_analysis`: After step 1 below: analyze correlations between forgetting and similarity measurements.
+
 ## Reproducing the results
 
 ### Step 1: Preparing the datasets
 
-The datasets (e.g. Dolma subsample, Tulu subsample) can be downloaded from this public s3 bucket: https://neurips-submission-15520.s3.us-east-1.amazonaws.com/data.zip and extracted under PROJECT_ROOT/data/.
+The datasets (e.g. Dolma subsample, Tulu subsample) can be downloaded from this public s3 bucket: https://low-rank-forgetting.s3.us-east-1.amazonaws.com/data.zip and extracted under PROJECT_ROOT/data/.
 
-
+The pre-computed statistics of forgetting can be downloaded from the public s3 bucket:https://low-rank-forgetting.s3.us-east-1.amazonaws.com/stats.zip and extracted under PROJECT_ROOT/stats/.
 
 ### Step 2: Fine-tuning the LLMs (Skippable with Step 4)
 
@@ -57,7 +63,7 @@ The following scripts load the saved model checkpoints, and evaluate log perplex
 
 The perplexity arrays obtained in Step 3 can be summarized into M * N association matrices Z. 
 
-Alternatively, the statistics can be downloaded from the public s3 bucket: https://neurips-submission-15520.s3.us-east-1.amazonaws.com/stats.zip and extracted under PROJECT_ROOT/stats/.
+Alternatively, the statistics can be downloaded from the public s3 bucket:https://low-rank-forgetting.s3.us-east-1.amazonaws.com/stats.zip and extracted under PROJECT_ROOT/stats/.
 
 We visualized these matrics in Figure 2, 6, 8 in the submitted paper.
 
